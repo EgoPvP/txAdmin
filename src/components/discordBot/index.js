@@ -32,7 +32,7 @@ module.exports = class DiscordBot {
         //NOTE: setting them up statically due to webpack requirements
         this.commands = new Collection([
             ['addwl', require('./commands/addwl.js')],
-            ['help', require('./commands/help.js')],
+          
             ['status', require('./commands/status.js')],
             ['txadmin', require('./commands/txadmin.js')],
 
@@ -117,7 +117,7 @@ module.exports = class DiscordBot {
         //Setup Ready listener
         this.client.on('ready', async () => {
             logOk(`Started and logged in as '${this.client.user.tag}'`);
-            this.client.user.setActivity(globals.config.serverName, {type: 'WATCHING'});
+            this.client.user.setActivity('EgoRP - Dein RP Server', {type: 'PLAYING'});
             this.announceChannel = this.client.channels.find(x => x.id === this.config.announceChannel);
             if(!this.announceChannel){
                 logError(`The announcements channel could not be found. Check the channel ID ${this.config.announceChannel}, or the bot permissions.`);

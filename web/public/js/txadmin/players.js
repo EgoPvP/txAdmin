@@ -487,6 +487,10 @@ function banPlayer() {
         reference: (modPlayer.curr.id !== false)? modPlayer.curr.id : modPlayer.curr.identifiers,
         // reference: modPlayer.curr.identifiers,
     }
+      
+ 
+                
+
     $.ajax({
         type: "POST",
         url: '/player/ban',

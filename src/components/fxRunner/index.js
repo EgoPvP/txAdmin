@@ -256,6 +256,11 @@ module.exports = class FXRunner {
                     reason: tReason
                 }
                 const kickMessage = globals.translator.t('server_actions.restarting', tOptions);
+
+                this.srvCmd(formatCommand('txaEvent', 'serverStopped', JSON.stringify({reason: tReason})));
+
+                await sleep(1000);
+
                 this.srvCmd(formatCommand('quit', kickMessage));
                 const discordMessage = globals.translator.t('server_actions.restarting_discord', tOptions);
                 globals.discordBot.sendAnnouncement(discordMessage);
@@ -292,10 +297,16 @@ module.exports = class FXRunner {
                     servername: globals.config.serverName,
                     reason: tReason
                 }
+                this.srvCmd(formatCommand('txaEvent', 'serverStopped', JSON.stringify({reason: tReason})));
+
                 let discordMessage = globals.translator.t('server_actions.stopping_discord', tOptions);
                 globals.discordBot.sendAnnouncement(discordMessage);
                 let kickMessage = globals.translator.t('server_actions.stopping', tOptions);
+
+                await sleep(1000);
+
                 this.srvCmd(formatCommand('quit', kickMessage));
+
                 await sleep(500);
             }
 
